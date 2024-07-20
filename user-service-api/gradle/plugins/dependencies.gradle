@@ -43,6 +43,9 @@ dependencies {
     // Dependência de teste
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    // Dependência para HttpServletRequest
+    implementation 'javax.servlet:javax.servlet-api:4.0.1'
+
 }
 
 dependencyManagement {
