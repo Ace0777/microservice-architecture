@@ -72,7 +72,7 @@ public interface UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Users found",
                     content = @Content(mediaType = APPLICATION_JSON_VALUE, array = @ArraySchema(schema = @Schema(implementation = UserResponse.class)))),
-            @ApiResponse(responseCode = "500", description = "Internal server error",
+            @ApiResponse(responseCode = "500", description = "Internal server errorr",
                     content = @Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = StandardError.class)
                     ))
     }
