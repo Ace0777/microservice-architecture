@@ -3,12 +3,12 @@ package br.com.ace.userserviceapi.service;
 import br.com.ace.userserviceapi.entity.User;
 import br.com.ace.userserviceapi.mapper.UserMapper;
 import br.com.ace.userserviceapi.repository.UserRepository;
+import models.exceptions.ResourceNotFoundException;
 import models.responses.UserResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -47,6 +47,22 @@ class UserServiceTest {
 
         verify(repository, times(1)).findById(anyString());
         verify(mapper, times(1)).fromEntity(any(User.class));
+    }
+
+
+    @Test
+    void whenCallFindByIdWithInvalidIdThenThrowResourceNotFoundException() {
+        when(repository.findById(anyString())).thenReturn(Optional.empty());
+
+        try {
+            service.findById("1");
+        } catch (Exception e) {
+            assertEquals(ResourceNotFoundException.class, e.getClass());
+            assertEquals("Object not found! Id: 1, Type: User", e.getMessage());
+        }
+
+        verify(repository, times(1)).findById(anyString());
+        verify(mapper, times(0)).fromEntity(any(User.class));
     }
 
 }
