@@ -40,17 +40,17 @@ dependencies {
     implementation 'org.mapstruct:mapstruct:1.5.3.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 
-    // Dependência de teste
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
     // Dependência para HttpServletRequest
     implementation 'javax.servlet:javax.servlet-api:4.0.1'
 
     //Spring security crypto to enconde password
     implementation 'org.springframework.security:spring-security-crypto:5.5.1'
 
-    // Mockito test dependency
-    implementation 'org.mockito:mockito-inline:4.11.0'
+    // Dependência de teste
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // lib to generate multiple datasets for tests
+    implementation 'uk.co.jemos.podam:podam:7.2.6.RELEASE'
 
 }
 

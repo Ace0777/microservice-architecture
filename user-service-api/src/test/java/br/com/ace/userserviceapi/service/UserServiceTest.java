@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.List;
 import java.util.Optional;
 
+import static br.com.ace.userserviceapi.creator.CreatorUtils.generateMock;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -39,15 +40,15 @@ class UserServiceTest {
     void whenCallFindByIdWithValidIdThenReturnUserResponse() {
 
         when(repository.findById(anyString())).thenReturn(Optional.of(new User()));
-        when(mapper.fromEntity(any(User.class))).thenReturn(mock(UserResponse.class));
+        when(mapper.fromEntity(any(User.class))).thenReturn(generateMock(UserResponse.class));
 
         final var response = service.findById("1");
 
         assertNotNull(response);
         assertEquals(UserResponse.class, response.getClass());
 
-        verify(repository, times(1)).findById(anyString());
-        verify(mapper, times(1)).fromEntity(any(User.class));
+        verify(repository).findById(anyString());
+        verify(mapper).fromEntity(any(User.class));
     }
 
 
@@ -62,7 +63,7 @@ class UserServiceTest {
             assertEquals("Object not found! Id: 1, Type: User", e.getMessage());
         }
 
-        verify(repository, times(1)).findById(anyString());
+        verify(repository).findById(anyString());
         verify(mapper, times(0)).fromEntity(any(User.class));
     }
 
@@ -78,8 +79,25 @@ class UserServiceTest {
         assertEquals(2, response.size());
         assertEquals(UserResponse.class, response.get(0).getClass());
 
-        verify(repository, times(1)).findAll();
+        verify(repository).findAll();
         verify(mapper, times(2)).fromEntity(any(User.class));
+    }
+
+    @Test
+    void whenCallSaveThenSucess(){
+        final var request = generateMock(models.requests.CreateUserRequest.class);
+
+        when(mapper.toEntity(any())).thenReturn(new User());
+        when(encoder.encode(anyString())).thenReturn("encoded");
+        when(repository.save(any(User.class))).thenReturn(new User());
+        when(repository.findByEmail(anyString())).thenReturn(Optional.empty());
+
+        service.save(request);
+
+        verify(mapper).toEntity(request);
+        verify(encoder).encode(request.password());
+        verify(repository).save(any(User.class));
+        verify(repository).findByEmail(request.email());
     }
 
 }
