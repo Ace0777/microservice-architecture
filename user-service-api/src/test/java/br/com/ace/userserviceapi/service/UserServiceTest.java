@@ -4,12 +4,14 @@ import br.com.ace.userserviceapi.entity.User;
 import br.com.ace.userserviceapi.mapper.UserMapper;
 import br.com.ace.userserviceapi.repository.UserRepository;
 import models.exceptions.ResourceNotFoundException;
+import models.requests.CreateUserRequest;
 import models.responses.UserResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
@@ -100,4 +102,25 @@ class UserServiceTest {
         verify(repository).findByEmail(request.email());
     }
 
+    @Test
+    void whenCallSaveWithInvalidEmailThenThrowDataIntegrityViolationException(){
+
+        final var request = generateMock(CreateUserRequest.class);
+        final var entity = generateMock(User.class);
+
+        when(repository.findByEmail(anyString())).thenReturn(Optional.of(entity));
+
+
+        try {
+            service.save(request);
+        } catch (Exception e) {
+            assertEquals(DataIntegrityViolationException.class, e.getClass());
+            assertEquals("Email ["+request.email()+"] already exists!", e.getMessage());
+        }
+
+        verify(repository).findByEmail(request.email());
+        verify(mapper, times(0)).toEntity(request);
+        verify(encoder, times(0)).encode(request.password());
+        verify(repository, times(0)).save(any(User.class));
+    }
 }
