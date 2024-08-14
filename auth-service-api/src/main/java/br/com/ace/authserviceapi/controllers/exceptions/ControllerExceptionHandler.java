@@ -34,9 +34,7 @@ public class ControllerExceptionHandler {
                         .path(request.getRequestURI())
                         .build()
         );
-
     }
-
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     ResponseEntity<ValidationException> handleMethodArgumentNotValidException(final MethodArgumentNotValidException ex, final HttpServletRequest request) {
