@@ -7,3 +7,4 @@ spring:
 
 jwt.secret: 'secret'
 jwt.expiration: 1200000
+jwt.expiration-sec.refresh-token: 3600

@@ -1,5 +1,6 @@
-package br.com.ace.authserviceapi.security.dtos;
+package br.com.ace.authserviceapi.security;
 
+import br.com.ace.authserviceapi.security.dtos.UserDetailsDTO;
 import br.com.ace.authserviceapi.utils.JWTUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -11,7 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 
 @Log4j2
 @RequiredArgsConstructor
-public class JWTAuthenticationimpl {
+public class JWTAuthenticationImpl {
 
     private final JWTUtils jwtUtils;
 
@@ -34,8 +35,8 @@ public class JWTAuthenticationimpl {
         log.info("succesfully authenticated user {}", detailsDTO.getUsername());
         final var token = jwtUtils.generateToken(detailsDTO);
         return AuthenticationResponse.builder()
-                .type("JWT")
-                .token("Bearer " + token)
+                .type("Bearer")
+                .token(token)
                 .build();
     }
 }

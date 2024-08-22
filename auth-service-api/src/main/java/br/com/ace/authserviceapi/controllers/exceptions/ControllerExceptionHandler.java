@@ -2,6 +2,7 @@ package br.com.ace.authserviceapi.controllers.exceptions;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+import models.exceptions.RefreshTokenExpired;
 import models.exceptions.ResourceNotFoundException;
 import models.exceptions.StandardError;
 import models.exceptions.ValidationException;
@@ -23,8 +24,8 @@ import static org.springframework.http.HttpStatus.*;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
-    @ExceptionHandler(BadCredentialsException.class)
-    ResponseEntity<StandardError> handleBadCredentialsException(final BadCredentialsException ex, final HttpServletRequest request) {
+    @ExceptionHandler({BadCredentialsException.class, RefreshTokenExpired.class})
+    ResponseEntity<StandardError> handleBadCredentialsException(final RuntimeException ex, final HttpServletRequest request) {
 
         return ResponseEntity.status(UNAUTHORIZED).body(
                 StandardError.builder()
@@ -56,6 +57,8 @@ public class ControllerExceptionHandler {
         return ResponseEntity.badRequest().body(error);
 
     }
+
+
 
 }
 
