@@ -1,10 +1,8 @@
 spring:
+  profiles:
+    active: dev
   application:
     name: 'auth-service-api'
-  data:
-    mongodb:
-      uri: 'mongodb+srv://ace:ace@clusterhelpdesk.xemb2gp.mongodb.net/helpdeskdb?retryWrites=true&w=majority&appName=ClusterHelpDesk'
-
-jwt.secret: 'secret'
-jwt.expiration: 1200000
-jwt.expiration-sec.refresh-token: 3600
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URI:http://localhost:8888}
