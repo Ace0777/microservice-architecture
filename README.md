@@ -3,12 +3,12 @@
 
 ## Tecnologias Utilizadas
 <br>
-   * Spring Boot: Framework Java para criação de aplicações web e microsserviços.
-   * Spring Cloud: Conjunto de ferramentas para construir sistemas distribuídos.
-   * Spring Security: Framework de autenticação e autorização.
-   * JWT (JSON Web Tokens): Para autenticação e autorização segura.
-   * RabbitMQ: Sistema de mensageria para comunicação assíncrona.
-   * MongoDB Atlas: Serviço de banco de dados NoSQL gerenciado.
-   * Amazon RDS: Serviço de banco de dados relacional gerenciado.
-   * Docker: Plataforma para criação e gerenciamento de contêineres.
-   * GitHub: Plataforma de hospedagem de código e controle de versão.
+  • Spring Boot: Framework Java para criação de aplicações web e microsserviços.
+  • Spring Cloud: Conjunto de ferramentas para construir sistemas distribuídos.
+  • Spring Security: Framework de autenticação e autorização.
+  • JWT (JSON Web Tokens): Para autenticação e autorização segura.
+  • RabbitMQ: Sistema de mensageria para comunicação assíncrona.
+  • MongoDB Atlas: Serviço de banco de dados NoSQL gerenciado.
+  • Amazon RDS: Serviço de banco de dados relacional gerenciado.
+  • Docker: Plataforma para criação e gerenciamento de contêineres.
+  • GitHub: Plataforma de hospedagem de código e controle de versão.
