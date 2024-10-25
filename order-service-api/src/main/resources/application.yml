@@ -6,3 +6,7 @@ spring:
       uri: ${CONFIG_SERVER_URI:http://localhost:8888}
   profiles:
     active: dev
+  datasource:
+    url: 'jdbc:mysql://helpdeskdb.cdk0sco6uo4a.us-east-2.rds.amazonaws.com/helpdeskdb?useSSL=false&serverTimezone=UTC'
+    username: 'helpdeskuser'
+    password: 'helpdeskuser'

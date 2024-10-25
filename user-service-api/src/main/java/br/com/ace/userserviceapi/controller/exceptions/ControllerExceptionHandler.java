@@ -33,7 +33,6 @@ public class ControllerExceptionHandler {
                                     .path(request.getRequestURI())
                                     .build()
                     );
-
     }
 
 
