@@ -20,6 +20,7 @@ public enum ProfileEnum {
     }
 
     public static ProfileEnum toEnum(final String description) {
+
         return Arrays.stream(ProfileEnum.values())
                 .filter(profileEnum -> profileEnum.getDescription().equals(description))
                 .findFirst()
